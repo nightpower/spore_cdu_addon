@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
+  "key": {
+    "A": {
+      "item": "spore:armor_fragment"
+    },
+    "B": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "id": "sporeaddon:reinforced_compound_plate",
+    "count": 1
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "request": "launch",
+      "name": "Client",
+      "presentation": {
+        "group": "Mod Development - sporeaddon",
+        "order": 0
+      },
+      "projectName": "sporeaddon",
+      "mainClass": "net.neoforged.devlaunch.Main",
+      "args": [
+        "@C:\\Users\\alexe\\OneDrive\\Desktop\\my_mod\\SporeAddon_1.21.1_neoforge\\build\\moddev\\clientRunProgramArgs.txt"
+      ],
+      "vmArgs": [
+        "@C:\\Users\\alexe\\OneDrive\\Desktop\\my_mod\\SporeAddon_1.21.1_neoforge\\build\\moddev\\clientRunVmArgs.txt",
+        "-Dfml.modFolders\u003dsporeaddon%%C:\\Users\\alexe\\OneDrive\\Desktop\\my_mod\\SporeAddon_1.21.1_neoforge\\bin\\main"
+      ],
+      "cwd": "${workspaceFolder}\\run",
+      "env": {},
+      "console": "internalConsole",
+      "shortenCommandLine": "none"
+    },
+    {
+      "type": "java",
+      "request": "launch",
+      "name": "Data",
+      "presentation": {
+        "group": "Mod Development - sporeaddon",
+        "order": 1
+      },
+      "projectName": "sporeaddon",
+      "mainClass": "net.neoforged.devlaunch.Main",
+      "args": [
+        "@C:\\Users\\alexe\\OneDrive\\Desktop\\my_mod\\SporeAddon_1.21.1_neoforge\\build\\moddev\\dataRunProgramArgs.txt"
+      ],
+      "vmArgs": [
+        "@C:\\Users\\alexe\\OneDrive\\Desktop\\my_mod\\SporeAddon_1.21.1_neoforge\\build\\moddev\\dataRunVmArgs.txt",
+        "-Dfml.modFolders\u003dsporeaddon%%C:\\Users\\alexe\\OneDrive\\Desktop\\my_mod\\SporeAddon_1.21.1_neoforge\\bin\\main"
+      ],
+      "cwd": "${workspaceFolder}\\run",
+      "env": {},
+      "console": "internalConsole",
+      "shortenCommandLine": "none"
+    },
+    {
+      "type": "java",
+      "request": "launch",
+      "name": "GameTestServer",
+      "presentation": {
+        "group": "Mod Development - sporeaddon",
+        "order": 2
+      },
+      "projectName": "sporeaddon",
+      "mainClass": "net.neoforged.devlaunch.Main",
+      "args": [
+        "@C:\\Users\\alexe\\OneDrive\\Desktop\\my_mod\\SporeAddon_1.21.1_neoforge\\build\\moddev\\gameTestServerRunProgramArgs.txt"
+      ],
+      "vmArgs": [
+        "@C:\\Users\\alexe\\OneDrive\\Desktop\\my_mod\\SporeAddon_1.21.1_neoforge\\build\\moddev\\gameTestServerRunVmArgs.txt",
+        "-Dfml.modFolders\u003dsporeaddon%%C:\\Users\\alexe\\OneDrive\\Desktop\\my_mod\\SporeAddon_1.21.1_neoforge\\bin\\main"
+      ],
+      "cwd": "${workspaceFolder}\\run",
+      "env": {},
+      "console": "internalConsole",
+      "shortenCommandLine": "none"
+    },
+    {
+      "type": "java",
+      "request": "launch",
+      "name": "Server",
+      "presentation": {
+        "group": "Mod Development - sporeaddon",
+        "order": 3
+      },
+      "projectName": "sporeaddon",
+      "mainClass": "net.neoforged.devlaunch.Main",
+      "args": [
+        "@C:\\Users\\alexe\\OneDrive\\Desktop\\my_mod\\SporeAddon_1.21.1_neoforge\\build\\moddev\\serverRunProgramArgs.txt"
+      ],
+      "vmArgs": [
+        "@C:\\Users\\alexe\\OneDrive\\Desktop\\my_mod\\SporeAddon_1.21.1_neoforge\\build\\moddev\\serverRunVmArgs.txt",
+        "-Dfml.modFolders\u003dsporeaddon%%C:\\Users\\alexe\\OneDrive\\Desktop\\my_mod\\SporeAddon_1.21.1_neoforge\\bin\\main"
+      ],
+      "cwd": "${workspaceFolder}\\run",
+      "env": {},
+      "console": "internalConsole",
+      "shortenCommandLine": "none"
+    }
+  ]
+}

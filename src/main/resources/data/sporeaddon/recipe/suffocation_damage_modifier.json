@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " F ",
+    "PCP",
+    " F "
+  ],
+  "key": {
+    "P": {
+      "item": "sporeaddon:reinforced_compound_plate"
+    },
+    "F": {
+      "item": "spore:mutated_fiber"
+    },
+    "C": {
+      "item": "minecraft:sand"
+    }
+  },
+  "result": {
+    "id": "sporeaddon:suffocation_damage_modifier",
+    "count": 1
+  }
+}

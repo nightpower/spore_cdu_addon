@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " I ",
+        "IPI",
+        " I "
+    ],
+    "key": {
+        "I": {
+            "item": "minecraft:snowball"
+        },
+        "P": {
+            "item": "minecraft:paper"
+        }
+    },
+    "result": {
+        "id": "sporeaddon:frost_damage_modifier",
+        "count": 1
+    }
+}

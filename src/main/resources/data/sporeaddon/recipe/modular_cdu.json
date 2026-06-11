@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ADA",
+    "BCB",
+    "AEA"
+  ],
+  "key": {
+    "A": {
+      "item": "create:sturdy_sheet"
+    },
+    "B": {
+      "item": "sporeaddon:reinforced_compound_plate"
+    },
+    "C": {
+      "item": "spore:cdu"
+    },
+    "D": { 
+      "item": "create:electron_tube"
+    },
+    "E": { 
+      "item": "spore:circuit_board"
+    }
+  },
+  "result": {
+    "id": "sporeaddon:modular_cdu",
+    "count": 1
+  }
+}

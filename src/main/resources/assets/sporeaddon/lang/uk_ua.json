@@ -1,0 +1,22 @@
+{
+    "block.sporeaddon.modular_cdu": "Модульний CDU",
+    "item.sporeaddon.radius_modifier": "Модифікатор радіусу",
+    "item.sporeaddon.speed_modifier": "Модифікатор швидкості",
+    "item.sporeaddon.efficiency_modifier": "Модифікатор ефективності",
+    "item.sporeaddon.fire_damage_modifier": "Модифікатор вогняної шкоди",
+    "item.sporeaddon.suffocation_damage_modifier": "Модифікатор шкоди від задушення",
+    "item.sporeaddon.frost_damage_modifier": "Модифікатор шкоди від морозу",
+    "item.sporeaddon.destruction_damage_modifier": "Модифікатор шкоди знищення",
+    "item.sporeaddon.reinforced_compound_plate": "Посилена композитна пластина",
+    "itemGroup.sporeaddon_tab": "Spore Addon",
+    "tooltip.sporeaddon.modular_cdu.desc1": "Базове споживання: 50 FE, 25 mB Води",
+    "tooltip.sporeaddon.modular_cdu.desc2": "Очищує територію та приваблює Заражених",
+    "tooltip.sporeaddon.module.cost": "+200 FE, +100 mB Води за цикл",
+    "tooltip.sporeaddon.radius_modifier.desc": "+4 Блоки до радіусу очищення",
+    "tooltip.sporeaddon.speed_modifier.desc": "-2 Секунди від циклу очищення",
+    "tooltip.sporeaddon.efficiency_modifier.desc": "-150 FE, -50 mB Води за цикл (Мінімум 50 FE/25 mB)",
+    "tooltip.sporeaddon.fire_damage_modifier.desc": "Завдає 5 Вогняної шкоди + Підпал",
+    "tooltip.sporeaddon.suffocation_damage_modifier.desc": "Завдає 5 Шкоди від задушення",
+    "tooltip.sporeaddon.frost_damage_modifier.desc": "Завдає 5 Шкоди від обмороження",
+    "tooltip.sporeaddon.destruction_damage_modifier.desc": "Завдає 5 Магічної шкоди"
+}

@@ -1,0 +1,22 @@
+{
+    "block.sporeaddon.modular_cdu": "Modular CDU",
+    "item.sporeaddon.radius_modifier": "Radius Upgrade",
+    "item.sporeaddon.speed_modifier": "Speed Upgrade",
+    "item.sporeaddon.efficiency_modifier": "Efficiency Upgrade",
+    "item.sporeaddon.fire_damage_modifier": "Fire Damage Modifier",
+    "item.sporeaddon.suffocation_damage_modifier": "Suffocation Damage Modifier",
+    "item.sporeaddon.frost_damage_modifier": "Frost Damage Modifier",
+    "item.sporeaddon.destruction_damage_modifier": "Destruction Damage Modifier",
+    "item.sporeaddon.reinforced_compound_plate": "Reinforced Compound Plate",
+    "itemGroup.sporeaddon_tab": "Spore Addon",
+    "tooltip.sporeaddon.modular_cdu.desc1": "Base consumption: 50 FE, 25 mB Water",
+    "tooltip.sporeaddon.modular_cdu.desc2": "Cleans area and attracts Infected",
+    "tooltip.sporeaddon.module.cost": "+200 FE, +100 mB Water per cycle",
+    "tooltip.sporeaddon.radius_modifier.desc": "+4 Blocks to cleaning radius",
+    "tooltip.sporeaddon.speed_modifier.desc": "-2 Seconds to cleaning cycle",
+    "tooltip.sporeaddon.efficiency_modifier.desc": "-150 FE, -50 mB Water per cycle (Min 50 FE/25 mB)",
+    "tooltip.sporeaddon.fire_damage_modifier.desc": "Deals 5 Fire damage + Ignite",
+    "tooltip.sporeaddon.suffocation_damage_modifier.desc": "Deals 5 Suffocation damage",
+    "tooltip.sporeaddon.frost_damage_modifier.desc": "Deals 5 Frost damage",
+    "tooltip.sporeaddon.destruction_damage_modifier.desc": "Deals 5 Magic damage"
+}

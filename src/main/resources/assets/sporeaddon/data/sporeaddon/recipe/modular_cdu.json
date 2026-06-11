@@ -1,0 +1,32 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "DED",
+        "PCP",
+        "RFR"
+    ],
+    "key": {
+        "C": {
+            "item": "spore:cdu"
+        },
+        "D": {
+            "item": "sporeaddon:reinforced_compound_plate"
+        },
+        "E": {
+            "item": "minecraft:comparator"
+        },
+        "F": {
+            "item": "minecraft:hopper"
+        },
+        "P": {
+            "item": "minecraft:iron_bars"
+        },
+        "R": {
+            "item": "minecraft:redstone_block"
+        }
+    },
+    "result": {
+        "id": "sporeaddon:modular_cdu",
+        "count": 1
+    }
+}

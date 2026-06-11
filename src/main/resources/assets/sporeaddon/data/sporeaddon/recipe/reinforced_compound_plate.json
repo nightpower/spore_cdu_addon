@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " C ",
+        "CNC",
+        " C "
+    ],
+    "key": {
+        "C": {
+            "item": "spore:compound_plate"
+        },
+        "N": {
+            "item": "minecraft:netherite_scrap"
+        }
+    },
+    "result": {
+        "id": "sporeaddon:reinforced_compound_plate",
+        "count": 1
+    }
+}
