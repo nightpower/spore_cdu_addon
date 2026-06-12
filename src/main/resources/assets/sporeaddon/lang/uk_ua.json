@@ -18,5 +18,8 @@
     "tooltip.sporeaddon.fire_damage_modifier.desc": "Завдає 5 Вогняної шкоди + Підпал",
     "tooltip.sporeaddon.suffocation_damage_modifier.desc": "Завдає 5 Шкоди від задушення",
     "tooltip.sporeaddon.frost_damage_modifier.desc": "Завдає 5 Шкоди від обмороження",
-    "tooltip.sporeaddon.destruction_damage_modifier.desc": "Завдає 5 Магічної шкоди"
+    "tooltip.sporeaddon.destruction_damage_modifier.desc": "Завдає 5 Магічної шкоди",
+    "item.sporeaddon.immunity_modifier": "Модифікатор імунітету до зараження",
+    "tooltip.sporeaddon.immunity_modifier.desc": "Запобігає зараженню CDU",
+    "tooltip.sporeaddon.immunity.cost": "Не збільшує споживання енергії"
 }

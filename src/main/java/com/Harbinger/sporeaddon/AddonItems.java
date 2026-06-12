@@ -82,6 +82,15 @@ public class AddonItems {
                 }
             });
 
+    public static final Supplier<Item> IMMUNITY_MODIFIER = ITEMS.register("immunity_modifier",
+            () -> new Item(new Item.Properties().stacksTo(64)) {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, java.util.List<net.minecraft.network.chat.Component> tooltipComponents, net.minecraft.world.item.TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(net.minecraft.network.chat.Component.translatable("tooltip.sporeaddon.immunity_modifier.desc").withStyle(net.minecraft.ChatFormatting.DARK_GREEN));
+                    tooltipComponents.add(net.minecraft.network.chat.Component.translatable("tooltip.sporeaddon.immunity.cost").withStyle(net.minecraft.ChatFormatting.RED));
+                }
+            });
+
     public static final Supplier<Item> REINFORCED_COMPOUND_PLATE = ITEMS.register("reinforced_compound_plate",
             () -> new Item(new Item.Properties().stacksTo(64)));
 }

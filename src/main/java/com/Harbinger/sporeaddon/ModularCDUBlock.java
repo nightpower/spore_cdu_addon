@@ -23,15 +23,16 @@ import javax.annotation.Nullable;
 
 public class ModularCDUBlock extends BaseEntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
+    public static final BooleanProperty INFECTED = BooleanProperty.create("infected");
 
     public ModularCDUBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false).setValue(INFECTED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LIT);
+        builder.add(LIT, INFECTED);
     }
 
     public static final MapCodec<ModularCDUBlock> CODEC = simpleCodec(ModularCDUBlock::new);
@@ -54,7 +55,7 @@ public class ModularCDUBlock extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide && !state.getValue(INFECTED)) {
             BlockEntity entity = level.getBlockEntity(pos);
             if (entity instanceof ModularCDUBlockEntity modularCDUBlockEntity) {
                 player.openMenu(new net.minecraft.world.SimpleMenuProvider(
@@ -68,6 +69,8 @@ public class ModularCDUBlock extends BaseEntityBlock {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(INFECTED)) return;
+        
         if (state.getValue(LIT)) {
             Vec3 localOffset = new Vec3(0.5, 1, 0.5);
             for (int i = 0; i < 360; i += 40) {

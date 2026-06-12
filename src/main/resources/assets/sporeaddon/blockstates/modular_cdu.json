@@ -1,10 +1,16 @@
 {
   "variants": {
-    "lit=false": {
+    "infected=false,lit=false": {
       "model": "sporeaddon:block/modular_cdu"
     },
-    "lit=true": {
+    "infected=false,lit=true": {
       "model": "sporeaddon:block/modular_cdu"
+    },
+    "infected=true,lit=false": {
+      "model": "sporeaddon:block/infected_modular_cdu"
+    },
+    "infected=true,lit=true": {
+      "model": "sporeaddon:block/infected_modular_cdu"
     }
   }
 }

@@ -18,5 +18,8 @@
     "tooltip.sporeaddon.fire_damage_modifier.desc": "Deals 5 Fire damage + Ignite",
     "tooltip.sporeaddon.suffocation_damage_modifier.desc": "Deals 5 Suffocation damage",
     "tooltip.sporeaddon.frost_damage_modifier.desc": "Deals 5 Frost damage",
-    "tooltip.sporeaddon.destruction_damage_modifier.desc": "Deals 5 Magic damage"
+    "tooltip.sporeaddon.destruction_damage_modifier.desc": "Deals 5 Magic damage",
+    "item.sporeaddon.immunity_modifier": "Infection Immunity Modifier",
+    "tooltip.sporeaddon.immunity_modifier.desc": "Prevents the CDU from being infected",
+    "tooltip.sporeaddon.immunity.cost": "No extra energy cost"
 }

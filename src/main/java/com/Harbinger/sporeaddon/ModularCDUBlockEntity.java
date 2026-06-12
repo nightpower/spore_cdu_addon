@@ -75,7 +75,8 @@ public class ModularCDUBlockEntity extends BlockEntity {
                        item == AddonItems.FIRE_DAMAGE_MODIFIER.get() ||
                        item == AddonItems.SUFFOCATION_DAMAGE_MODIFIER.get() ||
                        item == AddonItems.FROST_DAMAGE_MODIFIER.get() ||
-                       item == AddonItems.DESTRUCTION_DAMAGE_MODIFIER.get();
+                       item == AddonItems.DESTRUCTION_DAMAGE_MODIFIER.get() ||
+                       item == AddonItems.IMMUNITY_MODIFIER.get();
             }
         }
 
@@ -141,6 +142,8 @@ public class ModularCDUBlockEntity extends BlockEntity {
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, ModularCDUBlockEntity be) {
+        if (state.getValue(ModularCDUBlock.INFECTED)) return;
+
         // Spore AI attraction and block breaking
         if (level.getGameTime() % 20 == 0) {
             AABB aggroBox = new AABB(pos).inflate(32);
@@ -168,7 +171,13 @@ public class ModularCDUBlockEntity extends BlockEntity {
                     
                     be.blockHealth -= damage;
                     if (be.blockHealth <= 0) {
-                        level.destroyBlock(pos, true);
+                        int immunityMods = countModifier(be, AddonItems.IMMUNITY_MODIFIER.get());
+                        if (immunityMods == 0) {
+                            level.setBlock(pos, state.setValue(ModularCDUBlock.INFECTED, true).setValue(ModularCDUBlock.LIT, false), 3);
+                            level.playSound(null, pos, net.minecraft.sounds.SoundEvents.ZOMBIE_BREAK_WOODEN_DOOR, net.minecraft.sounds.SoundSource.BLOCKS, 1f, 1f);
+                        } else {
+                            be.blockHealth = 0; // Prevent further damage from making it negative, but it won't infect
+                        }
                         return;
                     }
                 }
