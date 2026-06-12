@@ -18,6 +18,6 @@ public class ModularCDUModel extends GeoModel<ModularCDUBlockEntity> {
 
     @Override
     public ResourceLocation getAnimationResource(ModularCDUBlockEntity animatable) {
-        return null; // No animations currently
+        return ResourceLocation.fromNamespaceAndPath(SporeAddon.MODID, "animations/block/cdu.animation.json");
     }
 }

@@ -131,6 +131,16 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new software.bernie.geckolib.animation.AnimationController<>(this, "controller", 0, this::predicate));
+    }
+
+    private software.bernie.geckolib.animation.PlayState predicate(software.bernie.geckolib.animation.AnimationState<ModularCDUBlockEntity> event) {
+        if (this.getBlockState().hasProperty(ModularCDUBlock.LIT) && this.getBlockState().getValue(ModularCDUBlock.LIT)) {
+            event.getController().setAnimation(software.bernie.geckolib.animation.RawAnimation.begin().thenLoop("animation"));
+            return software.bernie.geckolib.animation.PlayState.CONTINUE;
+        }
+        event.getController().forceAnimationReset();
+        return software.bernie.geckolib.animation.PlayState.STOP;
     }
 
     @Override
