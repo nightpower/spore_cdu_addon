@@ -66,7 +66,7 @@ public class ModularCDUBlockEntity extends BlockEntity {
         @Override
         public boolean isItemValid(int slot, ItemStack stack) {
             if (slot == 0) {
-                return BuiltInRegistries.ITEM.getKey(stack.getItem()).toString().equals("spore:mutated_fiber");
+                return BuiltInRegistries.ITEM.getKey(stack.getItem()).toString().equals("spore:ice_canister");
             } else {
                 Item item = stack.getItem();
                 return item == AddonItems.SPEED_MODIFIER.get() ||
@@ -198,7 +198,7 @@ public class ModularCDUBlockEntity extends BlockEntity {
                          be.fluidTank.getFluidAmount() >= waterCost &&
                          be.fluidTank.getFluid().is(net.minecraft.world.level.material.Fluids.WATER) &&
                          !fiberStack.isEmpty() && 
-                         BuiltInRegistries.ITEM.getKey(fiberStack.getItem()).toString().equals("spore:mutated_fiber");
+                         BuiltInRegistries.ITEM.getKey(fiberStack.getItem()).toString().equals("spore:ice_canister");
 
         if (state.hasProperty(ModularCDUBlock.LIT) && state.getValue(ModularCDUBlock.LIT) != canRun) {
             level.setBlock(pos, state.setValue(ModularCDUBlock.LIT, canRun), 3);

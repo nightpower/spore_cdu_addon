@@ -23,10 +23,7 @@ public class ModularCDUMenu extends AbstractContainerMenu {
         this.blockEntity = entity;
         this.data = data;
 
-        // Mutated Fiber slot (Slot 0)
         this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 44, 35));
-
-        // Modifier slots (Slot 1, 2, 3)
         this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 1, 116, 17));
         this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 2, 116, 35));
         this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 3, 116, 53));
