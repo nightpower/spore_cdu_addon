@@ -26,6 +26,13 @@ repositories {
         name = "NeoForge"
         url = "https://maven.neoforged.net/releases/"
     }
+    maven {
+        name = "GeckoLib"
+        url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
+    }
 }
 
 
@@ -144,6 +151,9 @@ dependencies {
 
     // Spore Mod Dependency
     implementation 'com.examplespore:spore:1.0.0'
+
+    // GeckoLib
+    implementation "software.bernie.geckolib:geckolib-neoforge-1.21.1:4.8.4"
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
