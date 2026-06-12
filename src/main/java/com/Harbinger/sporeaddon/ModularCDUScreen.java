@@ -29,8 +29,11 @@ public class ModularCDUScreen extends AbstractContainerScreen<ModularCDUMenu> {
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false);
         guiGraphics.drawString(this.font, "Module:", 114, 6, 4210752, false);
-        guiGraphics.drawString(this.font, "Energy: " + this.menu.getEnergy() + " / 100000", 8, 55, 4210752, false);
-        guiGraphics.drawString(this.font, "Water: " + this.menu.getFluidAmount() + " mB", 8, 65, 4210752, false);
+        guiGraphics.drawString(this.font, "Energy: " + this.menu.getEnergy() + " / 100000", 8, 20, 4210752, false);
+        guiGraphics.drawString(this.font, "Water: " + this.menu.getFluidAmount() + " mB", 8, 30, 4210752, false);
+        guiGraphics.drawString(this.font, "Consumes:", 8, 45, 4210752, false);
+        guiGraphics.drawString(this.font, "-" + this.menu.getEnergyCost() + " E / sec", 8, 55, 16733525, false);
+        guiGraphics.drawString(this.font, "-" + this.menu.getWaterCost() + " mB / shoot", 8, 65, 16733525, false);
     }
 
     @Override

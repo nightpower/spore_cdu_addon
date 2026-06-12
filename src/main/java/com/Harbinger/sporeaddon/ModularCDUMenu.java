@@ -15,7 +15,7 @@ public class ModularCDUMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public ModularCDUMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, (ModularCDUBlockEntity) inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(id, inv, (ModularCDUBlockEntity) inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
     }
 
     public ModularCDUMenu(int id, Inventory inv, ModularCDUBlockEntity entity, ContainerData data) {
@@ -23,10 +23,12 @@ public class ModularCDUMenu extends AbstractContainerMenu {
         this.blockEntity = entity;
         this.data = data;
 
-        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 44, 35));
-        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 1, 116, 17));
-        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 2, 116, 35));
-        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 3, 116, 53));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 116, 17));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 1, 116, 35));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 2, 116, 53));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 3, 134, 17));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 4, 134, 35));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 5, 134, 53));
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
@@ -42,6 +44,14 @@ public class ModularCDUMenu extends AbstractContainerMenu {
         return this.data.get(1);
     }
 
+    public int getEnergyCost() {
+        return this.data.get(2);
+    }
+
+    public int getWaterCost() {
+        return this.data.get(3);
+    }
+
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
@@ -49,11 +59,11 @@ public class ModularCDUMenu extends AbstractContainerMenu {
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
-            if (index < 4) {
-                if (!this.moveItemStackTo(itemstack1, 4, this.slots.size(), true)) {
+            if (index < 6) {
+                if (!this.moveItemStackTo(itemstack1, 6, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(itemstack1, 0, 4, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, 0, 6, false)) {
                 return ItemStack.EMPTY;
             }
             if (itemstack1.isEmpty()) {

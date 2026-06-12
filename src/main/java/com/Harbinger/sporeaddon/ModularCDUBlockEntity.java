@@ -64,34 +64,39 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
             setChanged();
         }
     };
-    private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(6) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
         }
 
         @Override
+        public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
+            nbt.putInt("Size", 6);
+            super.deserializeNBT(provider, nbt);
+        }
+
+        @Override
         public boolean isItemValid(int slot, ItemStack stack) {
-            if (slot == 0) {
-                return BuiltInRegistries.ITEM.getKey(stack.getItem()).toString().equals("spore:ice_canister");
-            } else {
-                Item item = stack.getItem();
-                return item == AddonItems.SPEED_MODIFIER.get() ||
-                       item == AddonItems.RADIUS_MODIFIER.get() ||
-                       item == AddonItems.EFFICIENCY_MODIFIER.get() ||
-                       item == AddonItems.FIRE_DAMAGE_MODIFIER.get() ||
-                       item == AddonItems.SUFFOCATION_DAMAGE_MODIFIER.get() ||
-                       item == AddonItems.FROST_DAMAGE_MODIFIER.get() ||
-                       item == AddonItems.DESTRUCTION_DAMAGE_MODIFIER.get() ||
-                       item == AddonItems.IMMUNITY_MODIFIER.get();
-            }
+            Item item = stack.getItem();
+            return item == AddonItems.SPEED_MODIFIER.get() ||
+                   item == AddonItems.RADIUS_MODIFIER.get() ||
+                   item == AddonItems.EFFICIENCY_MODIFIER.get() ||
+                   item == AddonItems.FIRE_DAMAGE_MODIFIER.get() ||
+                   item == AddonItems.SUFFOCATION_DAMAGE_MODIFIER.get() ||
+                   item == AddonItems.FROST_DAMAGE_MODIFIER.get() ||
+                   item == AddonItems.DESTRUCTION_DAMAGE_MODIFIER.get() ||
+                   item == AddonItems.IMMUNITY_MODIFIER.get();
         }
 
         @Override
         public int getSlotLimit(int slot) {
-            return slot == 0 ? 64 : 1;
+            return 1;
         }
     };
+
+    public int currentEnergyCost = 0;
+    public int currentWaterCost = 0;
 
     public final ContainerData dataAccess = new ContainerData() {
         @Override
@@ -99,6 +104,8 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
             switch (index) {
                 case 0: return energyStorage.getEnergyStored();
                 case 1: return fluidTank.getFluidAmount();
+                case 2: return currentEnergyCost;
+                case 3: return currentWaterCost;
                 default: return 0;
             }
         }
@@ -113,11 +120,13 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
                         fluidTank.setFluid(FluidStack.EMPTY);
                     }
                     break;
+                case 2: currentEnergyCost = value; break;
+                case 3: currentWaterCost = value; break;
             }
         }
         @Override
         public int getCount() {
-            return 2;
+            return 4;
         }
     };
 
@@ -132,11 +141,21 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new software.bernie.geckolib.animation.AnimationController<>(this, "controller", 0, this::predicate));
+        controllers.add(new software.bernie.geckolib.animation.AnimationController<>(this, "infected_controller", 0, this::infectedPredicate));
     }
 
     private software.bernie.geckolib.animation.PlayState predicate(software.bernie.geckolib.animation.AnimationState<ModularCDUBlockEntity> event) {
         if (this.getBlockState().hasProperty(ModularCDUBlock.LIT) && this.getBlockState().getValue(ModularCDUBlock.LIT)) {
             event.getController().setAnimation(software.bernie.geckolib.animation.RawAnimation.begin().thenLoop("animation"));
+            return software.bernie.geckolib.animation.PlayState.CONTINUE;
+        }
+        event.getController().forceAnimationReset();
+        return software.bernie.geckolib.animation.PlayState.STOP;
+    }
+
+    private software.bernie.geckolib.animation.PlayState infectedPredicate(software.bernie.geckolib.animation.AnimationState<ModularCDUBlockEntity> event) {
+        if (this.getBlockState().hasProperty(ModularCDUBlock.INFECTED) && this.getBlockState().getValue(ModularCDUBlock.INFECTED)) {
+            event.getController().setAnimation(software.bernie.geckolib.animation.RawAnimation.begin().thenLoop("infected"));
             return software.bernie.geckolib.animation.PlayState.CONTINUE;
         }
         event.getController().forceAnimationReset();
@@ -219,20 +238,23 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
         int destructionMods = countModifier(be, AddonItems.DESTRUCTION_DAMAGE_MODIFIER.get());
 
         int tickRate = Math.max(20, 200 - (speedMods * 40));
-        if (level.getGameTime() % tickRate != 0) return;
 
         int totalActiveMods = speedMods + radiusMods + fireMods + suffocationMods + frostMods + destructionMods;
-        int energyCost = Math.max(50, 100 + (totalActiveMods * 200) - (efficiencyMods * 150));
-        int waterCost = Math.max(25, 50 + (totalActiveMods * 100) - (efficiencyMods * 50));
+        int energyCostPerSecond = Math.max(50, 400 + (totalActiveMods * 50) - (efficiencyMods * 150));
+        if (frostMods > 0) {
+            energyCostPerSecond *= (int) Math.pow(2, frostMods);
+        }
+        int energyCost = energyCostPerSecond * (tickRate / 20);
+        int waterCost = Math.max(25, 150 + (totalActiveMods * 100) + (frostMods * 600) - (efficiencyMods * 50));
 
-        ItemStack fuelStack = be.itemHandler.getStackInSlot(0);
-        int requiredFuel = 1 + radiusMods; 
+        be.currentEnergyCost = energyCostPerSecond;
+        be.currentWaterCost = waterCost / (tickRate / 20);
+
+        if (level.getGameTime() % tickRate != 0) return;
 
         boolean canRun = be.energyStorage.getEnergyStored() >= energyCost &&
                          be.fluidTank.getFluidAmount() >= waterCost &&
-                         be.fluidTank.getFluid().is(net.minecraft.world.level.material.Fluids.WATER) &&
-                         !fuelStack.isEmpty() && fuelStack.getCount() >= requiredFuel &&
-                         BuiltInRegistries.ITEM.getKey(fuelStack.getItem()).toString().equals("spore:ice_canister");
+                         be.fluidTank.getFluid().is(net.minecraft.world.level.material.Fluids.WATER);
 
         if (state.hasProperty(ModularCDUBlock.LIT) && state.getValue(ModularCDUBlock.LIT) != canRun) {
             level.setBlock(pos, state.setValue(ModularCDUBlock.LIT, canRun), 3);
@@ -243,7 +265,6 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
         // Execute cleaning
         be.energyStorage.extractEnergyInternal(energyCost, false);
         be.fluidTank.drain(waterCost, IFluidHandler.FluidAction.EXECUTE);
-        be.itemHandler.extractItem(0, requiredFuel, false);
 
         int range = (2 * SConfig.DATAGEN.cryo_range.get()) + (radiusMods * 4);
         be.cleanInfection(pos, range, fireMods, suffocationMods, frostMods, destructionMods);
@@ -252,13 +273,14 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
 
     private static int countModifier(ModularCDUBlockEntity be, Item modifierItem) {
         int count = 0;
-        for (int i = 1; i < 4; i++) {
+        int slots = be.itemHandler.getSlots();
+        for (int i = 0; i < slots; i++) {
             ItemStack stack = be.itemHandler.getStackInSlot(i);
             if (!stack.isEmpty() && stack.getItem() == modifierItem) {
                 count += stack.getCount();
             }
         }
-        return Math.min(count, 4); // Cap max modifiers effect
+        return Math.min(count, 6); // Cap max modifiers effect
     }
 
     public void cleanInfection(BlockPos blockPos, int range, int fireMods, int suffocationMods, int frostMods, int destructionMods) {
@@ -306,17 +328,18 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
                 if (isSporeMob) {
                     // Custom Damage Modifiers
                     if (fireMods > 0) {
-                        livingEntity.hurt(level.damageSources().inFire(), fireMods * 5.0F);
+                        livingEntity.hurt(level.damageSources().inFire(), fireMods * 2.0F);
                         livingEntity.igniteForSeconds(fireMods * 3);
                     }
                     if (suffocationMods > 0) {
-                        livingEntity.hurt(level.damageSources().drown(), suffocationMods * 5.0F);
+                        livingEntity.hurt(level.damageSources().drown(), suffocationMods * 2.0F);
                     }
                     if (frostMods > 0) {
                         livingEntity.hurt(level.damageSources().freeze(), frostMods * 5.0F);
+                        livingEntity.addEffect(new MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 200, frostMods));
                     }
                     if (destructionMods > 0) {
-                        livingEntity.hurt(level.damageSources().magic(), destructionMods * 5.0F);
+                        livingEntity.hurt(level.damageSources().magic(), destructionMods * 2.0F);
                     }
                 }
             }

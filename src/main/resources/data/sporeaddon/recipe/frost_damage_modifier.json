@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " F ",
+    "FPF",
     "PCP",
-    " F "
+    "FPF"
   ],
   "key": {
     "P": {
       "item": "sporeaddon:reinforced_compound_plate"
     },
     "F": {
-      "item": "spore:mutated_fiber"
+      "item": "spore:freeze_burned_biomass"
     },
     "C": {
-      "item": "minecraft:ice"
+      "item": "spore:ice_canister"
     }
   },
   "result": {
