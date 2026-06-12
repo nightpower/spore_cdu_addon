@@ -175,7 +175,6 @@ public class ModularCDUBlockEntity extends BlockEntity {
             }
         }
 
-        // Count modifiers
         int speedMods = countModifier(be, AddonItems.SPEED_MODIFIER.get());
         int radiusMods = countModifier(be, AddonItems.RADIUS_MODIFIER.get());
         int efficiencyMods = countModifier(be, AddonItems.EFFICIENCY_MODIFIER.get());
@@ -191,14 +190,14 @@ public class ModularCDUBlockEntity extends BlockEntity {
         int energyCost = Math.max(50, 100 + (totalActiveMods * 200) - (efficiencyMods * 150));
         int waterCost = Math.max(25, 50 + (totalActiveMods * 100) - (efficiencyMods * 50));
 
-        ItemStack fiberStack = be.itemHandler.getStackInSlot(0);
+        ItemStack fuelStack = be.itemHandler.getStackInSlot(0);
+        int requiredFuel = 1 + radiusMods; 
 
-        // Check resources
         boolean canRun = be.energyStorage.getEnergyStored() >= energyCost &&
                          be.fluidTank.getFluidAmount() >= waterCost &&
                          be.fluidTank.getFluid().is(net.minecraft.world.level.material.Fluids.WATER) &&
-                         !fiberStack.isEmpty() && 
-                         BuiltInRegistries.ITEM.getKey(fiberStack.getItem()).toString().equals("spore:ice_canister");
+                         !fuelStack.isEmpty() && fuelStack.getCount() >= requiredFuel &&
+                         BuiltInRegistries.ITEM.getKey(fuelStack.getItem()).toString().equals("spore:ice_canister");
 
         if (state.hasProperty(ModularCDUBlock.LIT) && state.getValue(ModularCDUBlock.LIT) != canRun) {
             level.setBlock(pos, state.setValue(ModularCDUBlock.LIT, canRun), 3);
@@ -209,7 +208,7 @@ public class ModularCDUBlockEntity extends BlockEntity {
         // Execute cleaning
         be.energyStorage.extractEnergyInternal(energyCost, false);
         be.fluidTank.drain(waterCost, IFluidHandler.FluidAction.EXECUTE);
-        be.itemHandler.extractItem(0, 1, false);
+        be.itemHandler.extractItem(0, requiredFuel, false);
 
         int range = (2 * SConfig.DATAGEN.cryo_range.get()) + (radiusMods * 4);
         be.cleanInfection(pos, range, fireMods, suffocationMods, frostMods, destructionMods);
