@@ -176,7 +176,7 @@ public class ModularCDUBlockEntity extends BlockEntity {
                             level.setBlock(pos, state.setValue(ModularCDUBlock.INFECTED, true).setValue(ModularCDUBlock.LIT, false), 3);
                             level.playSound(null, pos, net.minecraft.sounds.SoundEvents.ZOMBIE_BREAK_WOODEN_DOOR, net.minecraft.sounds.SoundSource.BLOCKS, 1f, 1f);
                         } else {
-                            be.blockHealth = 0; // Prevent further damage from making it negative, but it won't infect
+                            level.destroyBlock(pos, true);
                         }
                         return;
                     }
