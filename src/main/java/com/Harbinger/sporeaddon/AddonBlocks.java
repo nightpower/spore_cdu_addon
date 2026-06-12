@@ -11,5 +11,5 @@ public class AddonBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK, SporeAddon.MODID);
 
     public static final Supplier<Block> MODULAR_CDU = BLOCKS.register("modular_cdu",
-            () -> new ModularCDUBlock(BlockBehaviour.Properties.of().strength(3.0F, 6.0F).requiresCorrectToolForDrops()));
+            () -> new ModularCDUBlock(BlockBehaviour.Properties.of().strength(3.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion()));
 }

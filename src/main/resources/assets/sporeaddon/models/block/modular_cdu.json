@@ -1,8 +1,6 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/block",
   "textures": {
-    "bottom": "sporeaddon:block/modular_cdu_bottom",
-    "top": "sporeaddon:block/modular_cdu_top",
-    "side": "sporeaddon:block/modular_cdu_side"
+    "particle": "sporeaddon:block/cdu"
   }
 }

@@ -12,13 +12,7 @@ public class AddonItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, SporeAddon.MODID);
 
     public static final Supplier<Item> MODULAR_CDU = ITEMS.register("modular_cdu",
-            () -> new BlockItem(AddonBlocks.MODULAR_CDU.get(), new Item.Properties()) {
-                @Override
-                public void appendHoverText(ItemStack stack, Item.TooltipContext context, java.util.List<net.minecraft.network.chat.Component> tooltipComponents, net.minecraft.world.item.TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(net.minecraft.network.chat.Component.translatable("tooltip.sporeaddon.modular_cdu.desc1").withStyle(net.minecraft.ChatFormatting.GRAY));
-                    tooltipComponents.add(net.minecraft.network.chat.Component.translatable("tooltip.sporeaddon.modular_cdu.desc2").withStyle(net.minecraft.ChatFormatting.GRAY));
-                }
-            });
+            () -> new com.Harbinger.sporeaddon.client.item.ModularCDUItem(new Item.Properties()));
 
     public static final Supplier<Item> RADIUS_MODIFIER = ITEMS.register("radius_modifier",
             () -> new Item(new Item.Properties().stacksTo(64)) {

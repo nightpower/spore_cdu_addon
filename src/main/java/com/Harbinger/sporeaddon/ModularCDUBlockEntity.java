@@ -46,9 +46,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ModularCDUBlockEntity extends BlockEntity {
+import software.bernie.geckolib.animatable.GeoBlockEntity;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.util.GeckoLibUtil;
+
+public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity {
     private static final TagKey<Block> foliage = TagKey.create(BuiltInRegistries.BLOCK.key(), ResourceLocation.parse("spore:removable_foliage"));
     public static final TagKey<Item> fungalItems = ItemTags.create(ResourceLocation.parse("spore:weapons"));
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     private final ModEnergyStorage energyStorage = new ModEnergyStorage(100000, 5000, 0);
     private final FluidTank fluidTank = new FluidTank(10000, stack -> stack.getFluid() == net.minecraft.world.level.material.Fluids.WATER) {
@@ -120,6 +127,15 @@ public class ModularCDUBlockEntity extends BlockEntity {
     public ModularCDUBlockEntity(BlockPos pos, BlockState state) {
         super(AddonBlockEntities.MODULAR_CDU_BE.get(), pos, state);
         blockMap = fabricateBlocks();
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
     }
 
     public IEnergyStorage getEnergyStorage() { return energyStorage; }
