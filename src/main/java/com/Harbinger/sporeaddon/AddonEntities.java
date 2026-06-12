@@ -11,7 +11,7 @@ public class AddonEntities {
 
     public static final Supplier<EntityType<CDUDecoyEntity>> CDU_DECOY = ENTITIES.register("cdu_decoy",
             () -> EntityType.Builder.<CDUDecoyEntity>of(CDUDecoyEntity::new, MobCategory.MISC)
-                    .sized(0.5f, 0.5f)
+                    .sized(3.0f, 3.0f)
                     .clientTrackingRange(4)
                     .updateInterval(20)
                     .build("cdu_decoy"));

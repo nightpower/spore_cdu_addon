@@ -131,7 +131,7 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
     };
 
     private final List<StoreDouble> blockMap;
-    public int blockHealth = 150;
+    public int blockHealth = 20;
     public CDUDecoyEntity decoy;
 
     public ModularCDUBlockEntity(BlockPos pos, BlockState state) {
@@ -228,8 +228,10 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
                         } else {
                             level.destroyBlock(pos, true);
                         }
-                        be.decoy.discard();
-                        be.decoy = null;
+                        if (be.decoy != null) {
+                            be.decoy.discard();
+                            be.decoy = null;
+                        }
                         return;
                     }
                 }

@@ -10,19 +10,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.npc.Villager;
 import java.util.Collections;
 
-public class CDUDecoyEntity extends LivingEntity {
-    public CDUDecoyEntity(EntityType<? extends LivingEntity> type, Level level) {
+public class CDUDecoyEntity extends Villager {
+    public CDUDecoyEntity(EntityType<? extends Villager> type, Level level) {
         super(type, level);
-        this.setInvisible(true);
         this.setNoGravity(true);
         this.setSilent(true);
         this.noPhysics = true;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return LivingEntity.createLivingAttributes()
+        return Villager.createAttributes()
                 .add(Attributes.MAX_HEALTH, 150.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
@@ -45,6 +45,16 @@ public class CDUDecoyEntity extends LivingEntity {
     @Override
     public HumanoidArm getMainArm() {
         return HumanoidArm.RIGHT;
+    }
+
+    @Override
+    public boolean isPickable() {
+        return false;
+    }
+
+    @Override
+    public boolean canBeHitByProjectile() {
+        return true;
     }
 
     @Override
