@@ -16,5 +16,6 @@ public class AddonClientSetup {
     @SubscribeEvent
     public static void registerRenderers(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(AddonBlockEntities.MODULAR_CDU_BE.get(), context -> new com.Harbinger.sporeaddon.client.renderer.ModularCDURenderer());
+        event.registerEntityRenderer(AddonEntities.CDU_DECOY.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
     }
 }

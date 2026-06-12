@@ -20,8 +20,14 @@ public class SporeAddon {
         AddonBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         AddonMenus.MENUS.register(modEventBus);
         AddonCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
+        AddonEntities.ENTITIES.register(modEventBus);
 
         modEventBus.addListener(this::registerCapabilities);
+        modEventBus.addListener(this::registerAttributes);
+    }
+
+    private void registerAttributes(net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent event) {
+        event.put(AddonEntities.CDU_DECOY.get(), CDUDecoyEntity.createAttributes().build());
     }
 
     private void registerCapabilities(RegisterCapabilitiesEvent event) {

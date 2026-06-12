@@ -131,7 +131,8 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
     };
 
     private final List<StoreDouble> blockMap;
-    public int blockHealth = 50;
+    public int blockHealth = 150;
+    public CDUDecoyEntity decoy;
 
     public ModularCDUBlockEntity(BlockPos pos, BlockState state) {
         super(AddonBlockEntities.MODULAR_CDU_BE.get(), pos, state);
@@ -193,28 +194,32 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
         if (level.getGameTime() % 20 == 0) {
             AABB aggroBox = new AABB(pos).inflate(32);
             List<com.Harbinger.Spore.Sentities.BaseEntities.Infected> infectedList = level.getEntitiesOfClass(com.Harbinger.Spore.Sentities.BaseEntities.Infected.class, aggroBox);
-            for (com.Harbinger.Spore.Sentities.BaseEntities.Infected infected : infectedList) {
-                // Prioritize block over player if block is closer
-                if (infected.getTarget() != null && infected.distanceToSqr(Vec3.atCenterOf(pos)) < infected.distanceToSqr(infected.getTarget())) {
-                    infected.setTarget(null);
+            
+            if (!infectedList.isEmpty() && state.getValue(ModularCDUBlock.LIT)) {
+                if (be.decoy == null || be.decoy.isRemoved()) {
+                    List<CDUDecoyEntity> existing = level.getEntitiesOfClass(CDUDecoyEntity.class, new AABB(pos));
+                    if (!existing.isEmpty()) {
+                        be.decoy = existing.get(0);
+                    }
+                    if (be.decoy == null || be.decoy.isRemoved()) {
+                        be.decoy = new CDUDecoyEntity(AddonEntities.CDU_DECOY.get(), level);
+                        be.decoy.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+                        level.addFreshEntity(be.decoy);
+                    }
                 }
+            } else if (be.decoy != null) {
+                be.decoy.discard();
+                be.decoy = null;
+            }
 
-                if (infected.getTarget() == null) {
-                    infected.setSearchPos(pos);
-                }
-
-                if (infected.distanceToSqr(Vec3.atCenterOf(pos)) <= 16.0) {
-                    infected.getNavigation().stop();
-                    infected.getLookControl().setLookAt(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
-                    infected.swing(net.minecraft.world.InteractionHand.MAIN_HAND);
-                    level.playSound(null, pos, net.minecraft.sounds.SoundEvents.ZOMBIE_ATTACK_IRON_DOOR, net.minecraft.sounds.SoundSource.BLOCKS, 1f, 1f);
-                    level.levelEvent(2001, pos, Block.getId(state));
+            if (be.decoy != null && be.decoy.isAlive()) {
+                float damageTaken = be.decoy.getMaxHealth() - be.decoy.getHealth();
+                if (damageTaken > 0) {
+                    be.blockHealth -= damageTaken;
+                    be.decoy.setHealth(be.decoy.getMaxHealth());
+                    level.playSound(null, pos, net.minecraft.sounds.SoundEvents.ZOMBIE_BREAK_WOODEN_DOOR, net.minecraft.sounds.SoundSource.BLOCKS, 0.5f, 1f);
+                    be.setChanged();
                     
-                    int damage = 5;
-                    var attr = infected.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE);
-                    if (attr != null) damage = (int) attr.getValue();
-                    
-                    be.blockHealth -= damage;
                     if (be.blockHealth <= 0) {
                         int immunityMods = countModifier(be, AddonItems.IMMUNITY_MODIFIER.get());
                         if (immunityMods == 0) {
@@ -223,8 +228,17 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
                         } else {
                             level.destroyBlock(pos, true);
                         }
+                        be.decoy.discard();
+                        be.decoy = null;
                         return;
                     }
+                }
+            }
+
+            for (com.Harbinger.Spore.Sentities.BaseEntities.Infected infected : infectedList) {
+                if (be.decoy != null && (infected.getTarget() == null || infected.distanceToSqr(Vec3.atCenterOf(pos)) < infected.distanceToSqr(infected.getTarget()))) {
+                    infected.setTarget(be.decoy);
+                    infected.getNavigation().moveTo(be.decoy, 1.2D);
                 }
             }
         }
@@ -408,5 +422,14 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
             if (received > 0 && !simulate) setChanged();
             return received;
         }
+    }
+
+    @Override
+    public void setRemoved() {
+        if (decoy != null) {
+            decoy.discard();
+            decoy = null;
+        }
+        super.setRemoved();
     }
 }
