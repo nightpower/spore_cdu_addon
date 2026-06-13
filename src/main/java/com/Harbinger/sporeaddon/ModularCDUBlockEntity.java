@@ -2,7 +2,7 @@ package com.Harbinger.sporeaddon;
 
 import com.Harbinger.Spore.ExtremelySusThings.CustomJsonReader.SporeCduConversionData;
 import com.Harbinger.Spore.ExtremelySusThings.Utilities;
-import com.Harbinger.Spore.core.SConfig;
+
 import com.Harbinger.Spore.core.Sblocks;
 import com.Harbinger.Spore.core.Seffects;
 import com.Harbinger.Spore.Sentities.Utility.InfectionTendril;
@@ -56,6 +56,8 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
     public static final TagKey<Item> fungalItems = ItemTags.create(ResourceLocation.parse("spore:weapons"));
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    private int RADIUS_MODIFIER = 25;
 
     private final ModEnergyStorage energyStorage = new ModEnergyStorage(100000, 5000, 0);
     private final FluidTank fluidTank = new FluidTank(10000, stack -> stack.getFluid() == net.minecraft.world.level.material.Fluids.WATER) {
@@ -282,7 +284,7 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
         be.energyStorage.extractEnergyInternal(energyCost, false);
         be.fluidTank.drain(waterCost, IFluidHandler.FluidAction.EXECUTE);
 
-        int range = (2 * SConfig.DATAGEN.cryo_range.get()) + (radiusMods * 4);
+        int range = this.RADIUS_MODIFIER + (radiusMods * 4);
         be.cleanInfection(pos, range, fireMods, suffocationMods, frostMods, destructionMods);
         be.setChanged();
     }
