@@ -195,7 +195,7 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
         // Spore AI attraction and block breaking
         if (level.getGameTime() % 20 == 0) {
             AABB aggroBox = new AABB(pos).inflate(32);
-            List<com.Harbinger.Spore.Sentities.BaseEntities.Infected> infectedList = level.getEntitiesOfClass(com.Harbinger.Spore.Sentities.BaseEntities.Infected.class, aggroBox);
+            List<com.Harbinger.Spore.Sentities.BaseEntities.UtilityEntity> infectedList = level.getEntitiesOfClass(com.Harbinger.Spore.Sentities.BaseEntities.UtilityEntity.class, aggroBox);
             
             if (!infectedList.isEmpty() && state.getValue(ModularCDUBlock.LIT)) {
                 if (be.decoy == null || be.decoy.isRemoved()) {
@@ -239,7 +239,7 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
                 }
             }
 
-            for (com.Harbinger.Spore.Sentities.BaseEntities.Infected infected : infectedList) {
+            for (com.Harbinger.Spore.Sentities.BaseEntities.UtilityEntity infected : infectedList) {
                 if (be.decoy != null && (infected.getTarget() == null || infected.distanceToSqr(Vec3.atCenterOf(pos)) < infected.distanceToSqr(infected.getTarget()))) {
                     infected.setTarget(be.decoy);
                     infected.getNavigation().moveTo(be.decoy, 1.2D);
@@ -284,7 +284,7 @@ public class ModularCDUBlockEntity extends BlockEntity implements GeoBlockEntity
         be.energyStorage.extractEnergyInternal(energyCost, false);
         be.fluidTank.drain(waterCost, IFluidHandler.FluidAction.EXECUTE);
 
-        int range = this.RADIUS_MODIFIER + (radiusMods * 4);
+        int range = be.RADIUS_MODIFIER + (radiusMods * 4);
         be.cleanInfection(pos, range, fireMods, suffocationMods, frostMods, destructionMods);
         be.setChanged();
     }
