@@ -3,6 +3,7 @@ package com.Harbinger.sporeaddon;
 import com.Harbinger.Spore.ExtremelySusThings.CustomJsonReader.SporeCduConversionData;
 import com.Harbinger.Spore.ExtremelySusThings.Utilities;
 
+import com.Harbinger.Spore.core.SConfig;
 import com.Harbinger.Spore.core.Sblocks;
 import com.Harbinger.Spore.core.Seffects;
 import com.Harbinger.Spore.Sentities.Utility.InfectionTendril;
