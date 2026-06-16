@@ -21,5 +21,7 @@
     "tooltip.sporeaddon.destruction_damage_modifier.desc": "Deals 5 Magic damage",
     "item.sporeaddon.immunity_modifier": "Infection Immunity Modifier",
     "tooltip.sporeaddon.immunity_modifier.desc": "Prevents the CDU from being infected",
-    "tooltip.sporeaddon.immunity.cost": "No extra energy cost"
+    "tooltip.sporeaddon.immunity.cost": "No extra energy cost",
+    "item.sporeaddon.blaster_cleaner": "Blaster Cleaner",
+    "tooltip.sporeaddon.blaster_cleaner.desc": "Uses Spore Ice Canister and 10000 FE to shoot a sonic beam that instantly kills Spore mobs and cleans infection blocks."
 }

@@ -17,6 +17,7 @@ public class AddonCreativeTabs {
                     .icon(() -> new ItemStack(AddonItems.MODULAR_CDU.get()))
                     .displayItems((parameters, output) -> {
                         output.accept(AddonItems.MODULAR_CDU.get());
+                        output.accept(AddonItems.BLASTER_CLEANER.get());
                         output.accept(AddonItems.REINFORCED_COMPOUND_PLATE.get());
                         output.accept(AddonItems.RADIUS_MODIFIER.get());
                         output.accept(AddonItems.SPEED_MODIFIER.get());

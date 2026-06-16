@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    " R ",
+    " I "
+  ],
+  "key": {
+    "P": {
+      "item": "sporeaddon:reinforced_compound_plate"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "result": {
+    "id": "sporeaddon:blaster_cleaner",
+    "count": 1
+  }
+}

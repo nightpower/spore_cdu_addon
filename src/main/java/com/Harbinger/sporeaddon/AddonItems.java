@@ -87,4 +87,7 @@ public class AddonItems {
 
     public static final Supplier<Item> REINFORCED_COMPOUND_PLATE = ITEMS.register("reinforced_compound_plate",
             () -> new Item(new Item.Properties().stacksTo(64)));
+
+    public static final Supplier<Item> BLASTER_CLEANER = ITEMS.register("blaster_cleaner",
+            () -> new BlasterCleanerItem(new Item.Properties().stacksTo(1)));
 }

@@ -46,5 +46,37 @@ public class SporeAddon {
                 AddonBlockEntities.MODULAR_CDU_BE.get(),
                 (be, side) -> be.getItemHandler()
         );
+        event.registerItem(
+                Capabilities.EnergyStorage.ITEM,
+                (stack, ctx) -> new net.neoforged.neoforge.energy.IEnergyStorage() {
+                    @Override
+                    public int receiveEnergy(int maxReceive, boolean simulate) {
+                        int currentEnergy = BlasterCleanerItem.getEnergy(stack);
+                        int energyReceived = Math.min(BlasterCleanerItem.MAX_ENERGY - currentEnergy, maxReceive);
+                        if (!simulate) {
+                            BlasterCleanerItem.setEnergy(stack, currentEnergy + energyReceived);
+                        }
+                        return energyReceived;
+                    }
+                    @Override
+                    public int extractEnergy(int maxExtract, boolean simulate) {
+                        int currentEnergy = BlasterCleanerItem.getEnergy(stack);
+                        int energyExtracted = Math.min(currentEnergy, maxExtract);
+                        if (!simulate) {
+                            BlasterCleanerItem.setEnergy(stack, currentEnergy - energyExtracted);
+                        }
+                        return energyExtracted;
+                    }
+                    @Override
+                    public int getEnergyStored() { return BlasterCleanerItem.getEnergy(stack); }
+                    @Override
+                    public int getMaxEnergyStored() { return BlasterCleanerItem.MAX_ENERGY; }
+                    @Override
+                    public boolean canExtract() { return true; }
+                    @Override
+                    public boolean canReceive() { return true; }
+                },
+                AddonItems.BLASTER_CLEANER.get()
+        );
     }
 }

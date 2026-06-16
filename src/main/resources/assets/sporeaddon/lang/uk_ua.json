@@ -21,5 +21,7 @@
     "tooltip.sporeaddon.destruction_damage_modifier.desc": "Завдає 5 Магічної шкоди",
     "item.sporeaddon.immunity_modifier": "Модифікатор імунітету до зараження",
     "tooltip.sporeaddon.immunity_modifier.desc": "Запобігає зараженню CDU",
-    "tooltip.sporeaddon.immunity.cost": "Не збільшує споживання енергії"
+    "tooltip.sporeaddon.immunity.cost": "Не збільшує споживання енергії",
+    "item.sporeaddon.blaster_cleaner": "Очищувач Бластер",
+    "tooltip.sporeaddon.blaster_cleaner.desc": "Використовує Каністру Льоду Спори та 10000 FE для пострілу звуковим променем, який миттєво вбиває мобів Спори та очищує заражені блоки."
 }
