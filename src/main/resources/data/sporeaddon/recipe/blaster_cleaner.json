@@ -1,19 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "PPP",
-    " R ",
-    " I "
+    "IPP",
+    "PST",
+    "PTE"
   ],
   "key": {
+    "I": { 
+      "item": "spore:pci"
+    },
     "P": {
       "item": "sporeaddon:reinforced_compound_plate"
     },
-    "R": {
-      "item": "minecraft:redstone_block"
+    "E": { 
+      "item": "minecraft:echo_shard"
     },
-    "I": {
-      "item": "minecraft:iron_block"
+    "S": { 
+      "item": "spore:cdu"
+    },
+    "T": { 
+      "item": "spore:circuit_board"
     }
   },
   "result": {
