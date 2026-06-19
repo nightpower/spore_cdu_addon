@@ -93,4 +93,7 @@ public class AddonItems {
 
     public static final Supplier<Item> SPORE_RADAR = ITEMS.register("spore_radar",
             () -> new com.Harbinger.sporeaddon.client.item.SporeRadarItem(new Item.Properties()));
+
+    public static final Supplier<Item> FREEZING_MACHINE_GUN_ROUND = ITEMS.register("freezing_machine_gun_round",
+            () -> new FreezingMachineGunRoundItem(new Item.Properties().stacksTo(64)));
 }

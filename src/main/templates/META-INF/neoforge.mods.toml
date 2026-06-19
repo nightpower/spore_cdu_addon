@@ -89,3 +89,15 @@ description='''Fungus'''
 # stop your mod loading on the server for example.
 #[features.${mod_id}]
 #openGLVersion="[3.2,)"
+
+[[dependencies.${mod_id}]]
+    modId="createbigcannons"
+    type="required"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="spore"
+    type="required"
+    ordering="NONE"
+    side="BOTH"

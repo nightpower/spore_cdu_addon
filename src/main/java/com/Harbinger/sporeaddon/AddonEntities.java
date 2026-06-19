@@ -15,4 +15,5 @@ public class AddonEntities {
                     .clientTrackingRange(4)
                     .updateInterval(20)
                     .build("cdu_decoy"));
+
 }

@@ -24,6 +24,7 @@
     "tooltip.sporeaddon.immunity.cost": "Не збільшує споживання енергії",
     "item.sporeaddon.blaster_cleaner": "Бластер Очищення",
     "block.sporeaddon.spore_radar": "Споровий радар",
+    "item.sporeaddon.freezing_machine_gun_round": "Очищувальний Набій Кулемета",
     "gui.sporeaddon.radar.mobs": "Виявлено мобів: %d",
     "gui.sporeaddon.radar.range": "Радіус сканування: %d",
     "gui.sporeaddon.radar.energy": "Витрати енергії: %d FE/оберт",

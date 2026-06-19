@@ -155,6 +155,8 @@ dependencies {
     // GeckoLib
     implementation "software.bernie.geckolib:geckolib-neoforge-1.21.1:4.8.4"
 
+    implementation files("lib/createbigcannons-5.11.3-mc.1.21.1.jar")
+
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html

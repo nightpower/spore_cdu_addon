@@ -24,6 +24,7 @@
     "tooltip.sporeaddon.immunity.cost": "No extra energy cost",
     "item.sporeaddon.blaster_cleaner": "Cleaner Blaster",
     "block.sporeaddon.spore_radar": "Spore Radar",
+    "item.sporeaddon.freezing_machine_gun_round": "Freezing Machine Gun Round",
     "gui.sporeaddon.radar.mobs": "Detected Mobs: %d",
     "gui.sporeaddon.radar.range": "Scan Radius: %d",
     "gui.sporeaddon.radar.energy": "Energy Usage: %d FE/rot",
