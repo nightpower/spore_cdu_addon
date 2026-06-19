@@ -27,5 +27,6 @@ public class AddonCreativeTabs {
                         output.accept(AddonItems.FROST_DAMAGE_MODIFIER.get());
                         output.accept(AddonItems.DESTRUCTION_DAMAGE_MODIFIER.get());
                         output.accept(AddonItems.IMMUNITY_MODIFIER.get());
+                        output.accept(AddonItems.SPORE_RADAR.get());
                     }).build());
 }

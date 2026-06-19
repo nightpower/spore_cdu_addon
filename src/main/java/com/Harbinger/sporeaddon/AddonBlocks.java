@@ -12,4 +12,7 @@ public class AddonBlocks {
 
     public static final Supplier<Block> MODULAR_CDU = BLOCKS.register("modular_cdu",
             () -> new ModularCDUBlock(BlockBehaviour.Properties.of().strength(3.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion().lightLevel(state -> state.hasProperty(ModularCDUBlock.LIT) && state.getValue(ModularCDUBlock.LIT) ? 15 : 0)));
+
+    public static final Supplier<Block> SPORE_RADAR = BLOCKS.register("spore_radar",
+            () -> new SporeRadarBlock(BlockBehaviour.Properties.of().strength(3.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion()));
 }

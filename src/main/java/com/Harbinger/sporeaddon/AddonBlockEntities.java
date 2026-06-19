@@ -11,4 +11,7 @@ public class AddonBlockEntities {
 
     public static final Supplier<BlockEntityType<ModularCDUBlockEntity>> MODULAR_CDU_BE = BLOCK_ENTITIES.register("modular_cdu",
             () -> BlockEntityType.Builder.of((pos, state) -> new ModularCDUBlockEntity(pos, state), AddonBlocks.MODULAR_CDU.get()).build(null));
+
+    public static final Supplier<BlockEntityType<SporeRadarBlockEntity>> SPORE_RADAR_BE = BLOCK_ENTITIES.register("spore_radar",
+            () -> BlockEntityType.Builder.of((pos, state) -> new SporeRadarBlockEntity(pos, state), AddonBlocks.SPORE_RADAR.get()).build(null));
 }

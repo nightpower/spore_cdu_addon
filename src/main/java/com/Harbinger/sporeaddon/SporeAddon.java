@@ -37,6 +37,11 @@ public class SporeAddon {
                 (be, side) -> be.getEnergyStorage()
         );
         event.registerBlockEntity(
+                Capabilities.EnergyStorage.BLOCK,
+                AddonBlockEntities.SPORE_RADAR_BE.get(),
+                (be, side) -> be.getEnergyStorage()
+        );
+        event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
                 AddonBlockEntities.MODULAR_CDU_BE.get(),
                 (be, side) -> be.getFluidHandler()

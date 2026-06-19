@@ -12,4 +12,7 @@ public class AddonMenus {
 
     public static final Supplier<MenuType<ModularCDUMenu>> MODULAR_CDU_MENU = MENUS.register("modular_cdu",
             () -> IMenuTypeExtension.create(ModularCDUMenu::new));
+
+    public static final Supplier<MenuType<SporeRadarMenu>> SPORE_RADAR_MENU = MENUS.register("spore_radar",
+            () -> IMenuTypeExtension.create(SporeRadarMenu::new));
 }

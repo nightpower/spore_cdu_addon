@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "sporeaddon:block/spore_radar"
+    }
+  }
+}

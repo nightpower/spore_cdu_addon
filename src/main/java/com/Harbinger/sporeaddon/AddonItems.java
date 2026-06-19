@@ -90,4 +90,7 @@ public class AddonItems {
 
     public static final Supplier<Item> BLASTER_CLEANER = ITEMS.register("blaster_cleaner",
             () -> new BlasterCleanerItem(new Item.Properties().stacksTo(1)));
+
+    public static final Supplier<Item> SPORE_RADAR = ITEMS.register("spore_radar",
+            () -> new com.Harbinger.sporeaddon.client.item.SporeRadarItem(new Item.Properties()));
 }
