@@ -277,4 +277,67 @@ public class BlasterCleanerItem extends Item implements GeoItem {
         tooltipComponents.add(net.minecraft.network.chat.Component.translatable("tooltip.sporeaddon.blaster_cleaner.desc").withStyle(net.minecraft.ChatFormatting.AQUA));
         tooltipComponents.add(net.minecraft.network.chat.Component.literal("Energy: " + getEnergy(stack) + " / " + MAX_ENERGY).withStyle(net.minecraft.ChatFormatting.YELLOW));
     }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, net.minecraft.world.entity.Entity entity, int slotId, boolean isSelected) {
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
+        if (!level.isClientSide && entity instanceof Player player) {
+            if (level.getGameTime() % 20 == 0) { // Check every second
+                int currentEnergy = getEnergy(stack);
+                if (currentEnergy < MAX_ENERGY) {
+                    chargeFromInventory(player, stack, MAX_ENERGY - currentEnergy);
+                }
+            }
+        }
+    }
+
+    private void chargeFromInventory(Player player, ItemStack blaster, int needed) {
+        for (ItemStack itemStack : player.getInventory().items) {
+            if (itemStack != blaster && !itemStack.isEmpty()) {
+                needed -= extractEnergyFromItem(itemStack, blaster, needed);
+                if (needed <= 0) return;
+            }
+        }
+        for (ItemStack itemStack : player.getInventory().armor) {
+            if (!itemStack.isEmpty()) {
+                needed -= extractEnergyFromItem(itemStack, blaster, needed);
+                if (needed <= 0) return;
+            }
+        }
+        if (!player.getInventory().offhand.isEmpty() && !player.getInventory().offhand.get(0).isEmpty()) {
+            needed -= extractEnergyFromItem(player.getInventory().offhand.get(0), blaster, needed);
+            if (needed <= 0) return;
+        }
+
+        try {
+            Class<?> curiosApiClass = Class.forName("top.theillusivec4.curios.api.CuriosApi");
+            java.util.Optional<?> optional = (java.util.Optional<?>) curiosApiClass.getMethod("getCuriosInventory", LivingEntity.class).invoke(null, player);
+            if (optional.isPresent()) {
+                Object curiosInventory = optional.get();
+                net.neoforged.neoforge.items.IItemHandler handler = (net.neoforged.neoforge.items.IItemHandler) curiosInventory.getClass().getMethod("getEquippedCurios").invoke(curiosInventory);
+                for (int i = 0; i < handler.getSlots(); i++) {
+                    ItemStack stack = handler.getStackInSlot(i);
+                    if (!stack.isEmpty()) {
+                        needed -= extractEnergyFromItem(stack, blaster, needed);
+                        if (needed <= 0) return;
+                    }
+                }
+            }
+        } catch (Exception e) {}
+    }
+
+    private int extractEnergyFromItem(ItemStack provider, ItemStack receiver, int maxExtract) {
+        net.neoforged.neoforge.energy.IEnergyStorage energyStorage = provider.getCapability(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.ITEM);
+        if (energyStorage != null && energyStorage.canExtract()) {
+            String registryName = BuiltInRegistries.ITEM.getKey(provider.getItem()).toString();
+            if (registryName.contains("backpack") || registryName.contains("sophisticated")) {
+                int extracted = energyStorage.extractEnergy(maxExtract, false);
+                if (extracted > 0) {
+                    setEnergy(receiver, getEnergy(receiver) + extracted);
+                    return extracted;
+                }
+            }
+        }
+        return 0;
+    }
 }
