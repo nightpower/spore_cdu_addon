@@ -28,5 +28,5 @@
     "gui.sporeaddon.radar.mobs": "Detected Mobs: %d",
     "gui.sporeaddon.radar.range": "Scan Radius: %d",
     "gui.sporeaddon.radar.energy": "Energy Usage: %d FE/rot",
-    "tooltip.sporeaddon.blaster_cleaner.desc": "Uses Spore Ice Canister and 10000 FE to shoot a sonic beam that instantly kills Spore mobs and cleans infection blocks."
+    "tooltip.sporeaddon.blaster_cleaner.desc": "Uses Spore Ice Canister and 50000 FE to shoot a sonic beam that instantly kills Spore mobs and cleans infection blocks."
 }
