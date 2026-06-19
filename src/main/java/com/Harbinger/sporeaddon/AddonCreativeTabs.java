@@ -28,5 +28,6 @@ public class AddonCreativeTabs {
                         output.accept(AddonItems.DESTRUCTION_DAMAGE_MODIFIER.get());
                         output.accept(AddonItems.IMMUNITY_MODIFIER.get());
                         output.accept(AddonItems.SPORE_RADAR.get());
+                        output.accept(AddonItems.FREEZING_MACHINE_GUN_ROUND.get());
                     }).build());
 }

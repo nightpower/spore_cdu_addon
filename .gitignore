@@ -13,6 +13,8 @@ out
 *.iml
 .idea
 
+temp_*
+
 # gradle
 build
 .gradle
