@@ -30,14 +30,58 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
-public class BlasterCleanerItem extends Item {
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.util.GeckoLibUtil;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
+import software.bernie.geckolib.renderer.GeoItemRenderer;
+import com.Harbinger.sporeaddon.client.model.BlasterCleanerModel;
+
+public class BlasterCleanerItem extends Item implements GeoItem {
     public static final int MAX_ENERGY = 100000;
-    public static final int ENERGY_PER_SHOT = 10000;
-    public static final int RANGE = 64;
+    public static final int ENERGY_PER_SHOT = 50000;
+    public static final int RANGE = 124;
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public BlasterCleanerItem(Properties properties) {
         super(properties);
+        software.bernie.geckolib.animatable.SingletonGeoAnimatable.registerSyncedAnimatable(this);
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "controller", 0, event -> {
+            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation"));
+            return software.bernie.geckolib.animation.PlayState.CONTINUE;
+        })
+        .triggerableAnim("shoot", RawAnimation.begin().thenPlay("attacke"))
+        );
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
+    }
+
+    @Override
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
+            private GeoItemRenderer<BlasterCleanerItem> renderer;
+
+            @Override
+            public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getGeoItemRenderer() {
+                if (this.renderer == null) {
+                    this.renderer = new GeoItemRenderer<>(new BlasterCleanerModel());
+                }
+                return this.renderer;
+            }
+        });
     }
 
     @Override
@@ -134,10 +178,12 @@ public class BlasterCleanerItem extends Item {
                 }
             });
 
+            triggerAnim(player, GeoItem.getOrAssignId(stack, serverLevel), "controller", "shoot");
+
             player.getCooldowns().addCooldown(this, 40); // 2 seconds cooldown
         }
 
-        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+        return InteractionResultHolder.consume(stack);
     }
 
     private void cleanBlock(Level level, BlockPos blockpos) {

@@ -1,6 +1,13 @@
 {
-  "parent": "minecraft:item/handheld",
-  "textures": {
-    "layer0": "sporeaddon:item/blaster_cleaner"
+  "parent": "minecraft:builtin/entity",
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ 10.25, 0, 0 ],
+      "translation": [ -0.75, -2.25, -1.75 ],
+      "scale": [ 0.896484375, 0.822265625, 0.732421875 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 4.7, 6.92, -7.9 ]
+    }
   }
 }
