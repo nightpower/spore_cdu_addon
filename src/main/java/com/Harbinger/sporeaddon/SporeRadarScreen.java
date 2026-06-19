@@ -35,6 +35,9 @@ public class SporeRadarScreen extends AbstractContainerScreen<SporeRadarMenu> {
         
         guiGraphics.drawString(this.font, Component.translatable("gui.sporeaddon.radar.mobs", this.menu.getDetectedMobs()), 8, 30, 4210752, false);
         guiGraphics.drawString(this.font, Component.translatable("gui.sporeaddon.radar.range", this.menu.getRadarRange()), 8, 45, 4210752, false);
+        
+        int energyCost = 5000 + (this.menu.getRadarRange() * 100);
+        guiGraphics.drawString(this.font, Component.translatable("gui.sporeaddon.radar.energy", energyCost), 8, 60, 4210752, false);
     }
 
     @Override

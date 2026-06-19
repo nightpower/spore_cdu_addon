@@ -22,8 +22,9 @@
     "item.sporeaddon.immunity_modifier": "Модифікатор імунітету до зараження",
     "tooltip.sporeaddon.immunity_modifier.desc": "Запобігає зараженню CDU",
     "tooltip.sporeaddon.immunity.cost": "Не збільшує споживання енергії",
-    "tooltip.sporeaddon.blaster_cleaner.desc": "Використовує Каністру Льоду Спори та 10000 FE для пострілу звуковим променем, який миттєво вбиває мобів Спори та очищує заражені блоки.",
     "block.sporeaddon.spore_radar": "Споровий радар",
     "gui.sporeaddon.radar.mobs": "Виявлено мобів: %d",
-    "gui.sporeaddon.radar.range": "Радіус сканування: %d"
+    "gui.sporeaddon.radar.range": "Радіус сканування: %d",
+    "gui.sporeaddon.radar.energy": "Витрати енергії: %d FE/оберт",
+    "tooltip.sporeaddon.blaster_cleaner.desc": "Використовує Каністру Льоду Спори та 10000 FE для пострілу звуковим променем, який миттєво вбиває мобів Спори та очищує заражені блоки."
 }
