@@ -22,6 +22,7 @@
     "item.sporeaddon.immunity_modifier": "Infection Immunity Modifier",
     "tooltip.sporeaddon.immunity_modifier.desc": "Prevents the CDU from being infected",
     "tooltip.sporeaddon.immunity.cost": "No extra energy cost",
+    "item.sporeaddon.blaster_cleaner": "Cleaner Blaster",
     "block.sporeaddon.spore_radar": "Spore Radar",
     "gui.sporeaddon.radar.mobs": "Detected Mobs: %d",
     "gui.sporeaddon.radar.range": "Scan Radius: %d",

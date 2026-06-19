@@ -22,6 +22,7 @@
     "item.sporeaddon.immunity_modifier": "Модифікатор імунітету до зараження",
     "tooltip.sporeaddon.immunity_modifier.desc": "Запобігає зараженню CDU",
     "tooltip.sporeaddon.immunity.cost": "Не збільшує споживання енергії",
+    "item.sporeaddon.blaster_cleaner": "Бластер Очищення",
     "block.sporeaddon.spore_radar": "Споровий радар",
     "gui.sporeaddon.radar.mobs": "Виявлено мобів: %d",
     "gui.sporeaddon.radar.range": "Радіус сканування: %d",
