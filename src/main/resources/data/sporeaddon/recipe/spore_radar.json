@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "RCR",
+    " P "
+  ],
+  "key": {
+    "E": {
+      "item": ""
+    },
+    "R": {
+      "item": "sporeaddon:reinforced_compound_plate"
+    },
+    "C": {
+      "item": "spore:scanner"
+    },
+    "P": {
+      "item": "spore:circuit_board"
+    }
+  },
+  "result": {
+    "id": "sporeaddon:spore_radar",
+    "count": 1
+  }
+}

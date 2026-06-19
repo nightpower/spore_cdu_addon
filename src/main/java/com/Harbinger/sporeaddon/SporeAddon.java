@@ -24,6 +24,8 @@ public class SporeAddon {
 
         modEventBus.addListener(this::registerCapabilities);
         modEventBus.addListener(this::registerAttributes);
+
+        NeoForge.EVENT_BUS.register(AddonEvents.class);
     }
 
     private void registerAttributes(net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent event) {
