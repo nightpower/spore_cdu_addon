@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "sporeaddon:modular_cdu"
+    "sporeaddon:modular_cdu",
+    "sporeaddon:spore_radar"
   ]
 }
